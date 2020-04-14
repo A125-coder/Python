@@ -103,29 +103,30 @@ class Account:
     @money.setter
     def withdraw_money(self, withdraw_money):
         if self.__money == withdraw_money:
-            print("No changes to the ammount")
+            print("No changes to the account")
         else:
             self.__money -= withdraw_money
 
 
+print("Bill M. Account:")
 bill = Account(random.randint(100000, 999999), 10600, "USA")
 bill.account_info()
 print("Bill's account before:", bill.money)
 bill.money = int(input("Enter amount to add: "))
 print("Bill's account after:", bill.money)
-
-print("Bill's account before:", bill.money)
+print("=====================================================")
+print("Bill's account before withdrawal:", bill.money)
 bill.withdraw_money = int(input("Enter witdrawal amount: "))
-print("Bill's account after:", bill.money)
-
+print("Bill's account after withdrawal:", bill.money)
+print("=====================================================")
+print("Adam D. Account:")
 adam = Account(random.randint(100000, 999999), 11201, "USA")
 adam.account_info()
 print("Adam's account before:", adam.money)
 adam.money = int(input("Enter amount to add: "))
 print("Adam's account after:", adam.money)
-
-print("Adam's account before:", adam.money)
+print("=====================================================")
+print("Adam's account before withdrawal:", adam.money)
 adam.withdraw_money = int(input("Enter witdrawal amount: "))
-print("Adam's account after:", adam.money)
-
-
+print("Adam's account after withdrawal:", adam.money)
+print("=====================================================")
