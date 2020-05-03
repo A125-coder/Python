@@ -1,14 +1,22 @@
 from lib.person import Users
 
-
-user = Users("John", "Snow", "j_snoww", "js@gmail.com", "jonsownkingofnorth")
-user.show_user_info()
+first_name = input("Enter your first name: ")
+last_name = input("Enter your last name: ")
+user_name = input("Enter your user name: ")
+email = input("Enter your email: ")
+password = input("Enter your password: ")
+user = Users(first_name, last_name, user_name, email, password)
+# user.show_user_info()
+print(
+    "===================================================================")
+users_register = user.register()
+print(users_register)
 user.save_user()
 
 
-user2 = Users("Bran", "Stark", "b_stark", "bs@gmail.com", "bskingofnorth")
+# user2 = Users("Bran", "Stark", "b_stark", "bs@gmail.com", "bskingofnorth")
 # user2.show_user_info()
-user2.save_user()
+# user2.save_user()
 
 users = user.show_all_users()
 print(users)

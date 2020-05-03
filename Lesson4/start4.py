@@ -96,7 +96,7 @@ class Account:
     @money.setter
     def money(self, add_money):
         if self.__money == add_money:
-            print("No changes to the ammount")
+            print("No changes to the account")
         else:
             self.__money += add_money
 
