@@ -45,8 +45,8 @@ class Users:
         """1. Реєстрація нового користувача з перевіркою (перевірити чи користувач вже є в файлі)
         """
         users_register = self.__dict__.values()
-        # all_users = self.show_all_users()
-        # with shelve.open("db.txt", "n") as doc:
+        all_users = self.show_all_users()
+        with shelve.open("db.txt", "n") as doc:
         for item in users_register:
             if item[2] == self.__user_name:
                 print("Username '" + item[2] + "' is already present")
