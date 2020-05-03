@@ -59,7 +59,6 @@ SELECT * FROM salers where sname is NULL;
 
 
 
-
 -- Task 3.
 
 -- 1. Получите среднее значение поля amt (таблица orders), не используя при этом функцию AVG(). 
