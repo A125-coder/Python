@@ -42,11 +42,16 @@ class Users:
                 print("Username '" + item[2] + "' is already exist")
                 break
         with open('db.txt', 'a') as doc:
-            doc.write("#".join(user)+"\n")
-         
-    def check_passw(self):
+            doc.write(" # ".join(user)+"\n")
+
+    def check_passw(self, user_name, password):
         """2. Логін користувача (логін по username з перевіркою паролю.)
         """
+        all_users = self.show_all_users()
+        for item in all_users:
+            if item[2] == user_name:
+                return item[4] == password
+        return False
 
     def delete_user(self):
         """3. Видалення користувача (по username)

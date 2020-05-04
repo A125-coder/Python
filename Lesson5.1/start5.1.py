@@ -10,6 +10,7 @@ user = Users(first_name, last_name, user_name, email, password)
 print(
     "===================================================================")
 user.register()
+print("User is logged in: ", user.check_passw(user_name, password))
 user.save_user()
 # users = user.show_all_users()
 # print(users)
