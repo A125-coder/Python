@@ -11,7 +11,7 @@ print(
     "===================================================================")
 user.register()
 print("User is logged in: ", user.check_passw(user_name, password))
-user.save_user()
+# user.save_user()
 # users = user.show_all_users()
 # print(users)
 
