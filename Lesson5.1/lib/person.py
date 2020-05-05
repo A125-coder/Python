@@ -53,7 +53,16 @@ class Users:
                 return item[4] == password
         return False
 
-    def delete_user(self):
+    def delete_user(self, user_name):
         """3. Видалення користувача (по username)
         """
-        
+        removed = False
+        all_users = self.show_all_users()
+        user_name = input("Enter  name to delete: ")
+        with open('db.txt', 'w') as db_file:
+            for item in all_users:
+                if item[2] != user_name:
+                    db_file.write(" # ".join(item)+"\n")
+                else:
+                    removed = True
+        return user_name
