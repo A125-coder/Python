@@ -26,18 +26,23 @@ class db_manager:
                 answer = self.__register()
                 print(answer)
             elif choice == 2:
-                print("Login")
+                login = self.__login()
+                print(login)
             elif choice == 3:
-                print("Edit")
+                edit = self.__edit()
+                print(edit)
             elif choice == 4:
                 delete = self.__delete()
                 print(delete)
             elif choice == 5:
-                print("Show all users")
+                all_users = self.__all_users()
+                print(all_users)
             elif choice == 6:
-                print("Search by user name")
+                search_by_Username = self.__searchByUsername()
+                print(search_by_Username)
             elif choice == 7:
-                print("Search by user email")
+                search_by_Email = self.__searchByEmail()
+                print(search_by_Email)
             elif choice == 0:
                 exit = True
                 print("Goodbye!")
@@ -70,9 +75,94 @@ class db_manager:
             "SELECT * FROM users WHERE username='"+username+"'")
         user_delete = self.__cursor.fetchone()
         if user_delete != None:
-            sql = "DELETE FROM users WHERE username = '" + username + "'"
+            sql = "DELETE FROM users WHERE username='" + username + "'"
             self.__cursor.execute(sql)
             self.__db.commit()
             return "User is deleted"
         else:
             return "This User do not exist!"
+
+    def __login(self):
+        username = input("Enter username: ")
+        password = input("Enter password: ")
+        self.__cursor.execute(
+            "SELECT * FROM users WHERE username='"+username+"' AND password='"+password+"'")
+        user_login = self.__cursor.fetchone()
+        if user_login != None:
+            return "Login was successful"
+        else:
+            return "Check your registration information"
+
+    def __edit(self):
+        exit = False
+        while not exit:
+            edit = int(input(
+                "Enter what you want to edit:\n1. Username\n2. Email\n3. Password\n0. OUT => "))
+            if edit == 1:
+                username = input("Edit username: ")
+                self.__cursor.execute(
+                    "SELECT * FROM users WHERE username='"+username+"'")
+                user_edit = self.__cursor.fetchone()
+                if user_edit != None:
+                    new_username = input("New username: ")
+                    sql = "UPDATE users SET username='"+new_username + \
+                        "' WHERE username= '" + username + "'"
+                    self.__cursor.execute(sql)
+                    self.__db.commit()
+                    return "Username is edited"
+                else:
+                    return "This User do not exist!"
+            elif edit == 2:
+                username = input("Enter username: ")
+                email = input("Edit email: ")
+                self.__cursor.execute(
+                    "SELECT * FROM users WHERE email='"+email+"' AND username='" + username + "'")
+                email_edit = self.__cursor.fetchone()
+                if email_edit != None:
+                    new_email = input("New email: ")
+                    sql = "UPDATE users SET email='"+new_email+"' WHERE email= '" + \
+                        email + "' AND username='" + username + "'"
+                    self.__cursor.execute(sql)
+                    self.__db.commit()
+                    return "Email is edited"
+                else:
+                    return "This User do not exist!"
+            elif edit == 3:
+                username = input("Enter username: ")
+                password = input("Edit password: ")
+                self.__cursor.execute(
+                    "SELECT * FROM users WHERE password='"+password+"' AND username='" + username + "'")
+                password_edit = self.__cursor.fetchone()
+                if password_edit != None:
+                    new_password = input("New password: ")
+                    sql = "UPDATE users SET password='"+new_password + \
+                        "' WHERE password= '" + password + "' AND username='" + username + "'"
+                    self.__cursor.execute(sql)
+                    self.__db.commit()
+                    return "Password is edited"
+                else:
+                    return "This User do not exist!"
+            elif edit == 0:
+                exit = True
+                print("Edit complete")
+            else:
+                print("Wrong choise")
+
+    def __all_users(self):
+        self.__cursor.execute("SELECT * FROM users")
+        all_users = self.__cursor.fetchall()
+        return all_users
+
+    def __searchByUsername(self):
+        username = input("Enter name to search: ")
+        self.__cursor.execute(
+            "SELECT * FROM users WHERE username='" + username + "'")
+        search_user = self.__cursor.fetchone()
+        return search_user
+
+    def __searchByEmail(self):
+        email = input("Enter email to search: ")
+        self.__cursor.execute(
+            "SELECT * FROM users WHERE email='" + email + "'")
+        search_user = self.__cursor.fetchone()
+        return search_user
