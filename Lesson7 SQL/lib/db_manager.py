@@ -166,9 +166,3 @@ class db_manager:
             "SELECT * FROM users WHERE email='" + email + "'")
         search_user = self.__cursor.fetchone()
         return search_user
-def __searchByEmail(self):
-        email = input("Enter email to search: ")
-        self.__cursor.execute(
-            "SELECT * FROM users WHERE email='" + email + "'")
-        search_user = self.__cursor.fetchone()
-        return search_user
