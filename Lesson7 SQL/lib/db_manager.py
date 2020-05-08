@@ -114,14 +114,12 @@ class db_manager:
                     return "This User do not exist!"
             elif edit == 2:
                 username = input("Enter username: ")
-                email = input("Edit email: ")
                 self.__cursor.execute(
-                    "SELECT * FROM users WHERE email='"+email+"' AND username='" + username + "'")
+                    "SELECT * FROM users WHERE username='" + username + "'")
                 email_edit = self.__cursor.fetchone()
                 if email_edit != None:
                     new_email = input("New email: ")
-                    sql = "UPDATE users SET email='"+new_email+"' WHERE email= '" + \
-                        email + "' AND username='" + username + "'"
+                    sql = "UPDATE users SET email='"+new_email+"' WHERE username='" + username + "'"
                     self.__cursor.execute(sql)
                     self.__db.commit()
                     return "Email is edited"
@@ -129,14 +127,13 @@ class db_manager:
                     return "This User do not exist!"
             elif edit == 3:
                 username = input("Enter username: ")
-                password = input("Edit password: ")
                 self.__cursor.execute(
-                    "SELECT * FROM users WHERE password='"+password+"' AND username='" + username + "'")
+                    "SELECT * FROM users WHERE username='" + username + "'")
                 password_edit = self.__cursor.fetchone()
                 if password_edit != None:
                     new_password = input("New password: ")
                     sql = "UPDATE users SET password='"+new_password + \
-                        "' WHERE password= '" + password + "' AND username='" + username + "'"
+                        "' WHERE username='" + username + "'"
                     self.__cursor.execute(sql)
                     self.__db.commit()
                     return "Password is edited"
