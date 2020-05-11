@@ -25,7 +25,7 @@ class db_manager:
         exit = False
         while not exit:
             choice = int(input(
-                "1. Update data\n2. Search by Country\n3. Search by Country Code\n0. Exit\n====> "))
+                "1. Update data\n2. Search by Country\n3. Search by Country Code\n4. TOP 10 Countries with Total Confirmed cases\n5. TOP 10 Countries with Total Recovered cases\n0. Exit\n====> "))
             if choice == 1:
                 answer = self.__update_covid_data()
                 print(answer)
@@ -35,6 +35,10 @@ class db_manager:
             elif choice == 3:
                 search_by_Country_Code = self.__searchByCountryCode()
                 print(search_by_Country_Code)
+            elif choice == 4:
+                top_10_Countries = self.__top_10_Countries()
+            elif choice == 5:
+                recovered = self.__top_10_Countries_recovered()
             elif choice == 0:
                 exit = True
                 print("Bye!")
@@ -81,3 +85,17 @@ class db_manager:
             return search_country_code
         else:
             return "Country '", country_code, "' not found"
+
+    def __top_10_Countries(self):
+        self.__cursor.execute(
+            "SELECT Country, TotalConfirmed FROM Countries GROUP BY TotalConfirmed DESC LIMIT 10")
+        search_top_10_Countries = self.__cursor.fetchall()
+        for i in search_top_10_Countries:
+            print(i[0], ": ", i[1])
+
+    def __top_10_Countries_recovered(self):
+        self.__cursor.execute(
+            "SELECT Country, TotalRecovered FROM Countries GROUP BY TotalRecovered DESC LIMIT 10")
+        recovered = self.__cursor.fetchall()
+        for i in recovered:
+            print(i[0], ": ", i[1])
